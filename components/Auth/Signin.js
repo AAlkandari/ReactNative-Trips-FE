@@ -16,6 +16,7 @@ import {
 } from "native-base";
 import React, { useState } from "react";
 import StackNavigation from "../Navigation/StackNavigation";
+import { StyleSheet } from "react-native";
 const Signin = ({ navigation }) => {
   const { user, setUser } = useState({
     username: "",
