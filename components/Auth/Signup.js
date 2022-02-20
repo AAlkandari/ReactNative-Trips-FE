@@ -1,4 +1,4 @@
-import { Link } from "@react-navigation/native";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -11,36 +11,22 @@ import {
   VStack,
   Text,
 } from "native-base";
-import React, { useState } from "react";
 
-const Signup = (navigation) => {
+const Signup = ({ navigation }) => {
   const toast = useToast();
   const { user, setUser } = useState({
     username: "",
     password: "",
+    email: "",
   });
-  const { confirmPassword, setConfirmPassword } = useState("");
+
   const handleSubmit = () => {
-    if (user.password === confirmPassword) authStore.signup(user);
-    else
-      toast.show({
-        title: "Wrong Password",
-        status: "error",
-      });
+    authStore.Signup(user);
+    navigation.goBack;
   };
   return (
     <Center w="100%">
       <Box safeArea p="2" py="8" w="90%" maxW="290">
-        <Heading
-          size="lg"
-          fontWeight="600"
-          color="coolGray.800"
-          _dark={{
-            color: "warmGray.50",
-          }}
-        >
-          Sign up
-        </Heading>
         <Heading
           mt="1"
           _dark={{
@@ -68,23 +54,27 @@ const Signup = (navigation) => {
             />
           </FormControl>
           <FormControl>
-            <FormControl.Label>Confirm Password</FormControl.Label>
-            <Input type="password" />
+            <FormControl.Label>Email</FormControl.Label>
+            <Input
+              type="email"
+              onChangeText={(value) => setUser({ ...user, email: value })}
+            />
           </FormControl>
           <Button mt="2" colorScheme="indigo" onPress={handleSubmit}>
             Sign up
           </Button>
           <HStack mt="6" justifyContent="center">
-            <Text
+            <Button
               fontSize="sm"
               color="coolGray.600"
               _dark={{
                 color: "warmGray.200",
               }}
+              onPress={() => navigation.navigate("Signin")}
             >
-              I'm Already sign in.{" "}
-            </Text>
-            <Link
+              I'm Already sign in.
+            </Button>
+            {/* <Link
               _text={{
                 color: "indigo.500",
                 fontWeight: "medium",
@@ -93,7 +83,7 @@ const Signup = (navigation) => {
               onPress={() => navigation.navigate}
             >
               Sign in
-            </Link>
+            </Link> */}
           </HStack>
         </VStack>
       </Box>

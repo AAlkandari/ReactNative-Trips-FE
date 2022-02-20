@@ -15,8 +15,8 @@ import {
   Text,
 } from "native-base";
 import React, { useState } from "react";
-
-const Signin = () => {
+import StackNavigation from "../Navigation/StackNavigation";
+const Signin = ({ navigation }) => {
   const { user, setUser } = useState({
     username: "",
     password: "",
@@ -65,18 +65,17 @@ const Signin = () => {
                 color: "warmGray.200",
               }}
             >
-              I'm a new user.{" "}
+              I'm a new user.
             </Text>
-            {/* <Link
-              _text={{
-                color: "indigo.500",
-                fontWeight: "medium",
-                fontSize: "sm",
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 15,
               }}
-              href="#"
+              onPress={() => navigation.navigate("Signup")}
             >
               Sign Up
-            </Link> */}
+            </Text>
           </HStack>
         </VStack>
       </Box>
