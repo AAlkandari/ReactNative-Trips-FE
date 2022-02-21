@@ -16,7 +16,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Icon2 from "react-native-vector-icons/FontAwesome";
 import COLORS from "../../const/color";
 import places from "../../const/places";
-import api from "../../../stores/api";
+import authstore from "../../../stores/authStore";
 
 const { width } = Dimensions.get("screen");
 const HomeScreen = ({ navigation }) => {
@@ -43,7 +43,7 @@ const HomeScreen = ({ navigation }) => {
         activeOpacity={0.8}
         onPress={() => navigation.navigate("DetailsScreen", place)}
       >
-        <ImageBackground style={style.cardImage} source={trip.image}>
+        <ImageBackground style={style.cardImage} source={place.image}>
           <Text
             style={{
               color: COLORS.white,
@@ -134,7 +134,7 @@ const HomeScreen = ({ navigation }) => {
         >
           <View style={{ flex: 1 }}>
             <Text style={style.headerTitle}>Hello</Text>
-            <Text style={style.headerTitle}>M7mdal7mdan</Text>
+            <Text style={style.headerTitle}>m7md</Text>
             <View style={style.inputContainer}>
               <Icon name="search" size={28} />
               <TextInput

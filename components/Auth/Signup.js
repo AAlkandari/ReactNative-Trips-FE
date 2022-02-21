@@ -25,7 +25,7 @@ const Signup = ({ navigation }) => {
 
   const handleSubmit = () => {
     authStore.signUp(user);
-    navigation.goBack;
+    navigation.goBack();
   };
   return (
     <Center w="100%">

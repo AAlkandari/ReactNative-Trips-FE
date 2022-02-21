@@ -20,7 +20,7 @@ import { useState } from "react";
 import COLORS from "../const/color";
 import StackNavigation from "../Navigation/StackNavigation";
 import { StyleSheet, SafeAreaView, StatusBar } from "react-native";
-// import authStore from "../../stores/authStore";
+import authStore from "../../stores/authStore";
 
 const Signin = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -29,7 +29,7 @@ const Signin = ({ navigation }) => {
   });
   const handleSubmit = () => {
     authStore.signIn(user);
-    navigation.goBack;
+    navigation.navigate("HomeScreen");
   };
   return (
     <Center w="100%">
