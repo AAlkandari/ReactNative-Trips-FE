@@ -23,9 +23,9 @@ const Signup = ({ navigation }) => {
     email: "",
   });
 
-  const handleSubmit = () => {
-    authStore.signUp(user);
-    navigation.goBack();
+  const handleSubmit = async () => {
+    await authStore.signUp(user);
+    if (authStore.user) navigation.replace("HomeScreen");
   };
   return (
     <Center w="100%">

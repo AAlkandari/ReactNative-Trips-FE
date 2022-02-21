@@ -29,10 +29,11 @@ class AuthStore {
       this.setUser(resp.data.token);
     } catch (error) {}
   };
-  signOut = () => {
+  signout = async () => {
     delete api.defaults.headers.common.Authorization;
-    AsyncStorage.removeItem("myToken");
     this.user = null;
+    await AsyncStorage.removeItem("myToken");
+    navigation.Replace("OnBoardScreen");
   };
 
   checkForToken = async () => {

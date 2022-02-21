@@ -13,18 +13,31 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import Icon2 from "react-native-vector-icons/FontAwesome";
+import Icon1 from "react-native-vector-icons/MaterialIcons";
+import Icon2 from "react-native-vector-icons/MaterialIcons";
+import Icon3 from "react-native-vector-icons/FontAwesome";
+import Icon4 from "react-native-vector-icons/MaterialCommunityIcons";
 import COLORS from "../../const/color";
 import places from "../../const/places";
-import authstore from "../../../stores/authStore";
-
+import authStore from "../../../stores/authStore";
 const { width } = Dimensions.get("screen");
 const HomeScreen = ({ navigation }) => {
+  const handleSubmit = async () => {
+    await authStore.signout();
+    console.log("signedOut");
+  };
   const categoryIcons = [
-    <Icon name="create" size={25} color={COLORS.primary} />,
-    <Icon name="place" size={25} color={COLORS.primary} />,
-    <Icon2 name="user" size={25} color={COLORS.primary} />,
+    <Icon1 name="create" size={25} color={COLORS.primary} />,
+    <Icon2 name="place" size={25} color={COLORS.primary} />,
+    <Icon3 name="user" size={25} color={COLORS.primary} />,
+    <Icon4
+      name="logout"
+      size={25}
+      color={COLORS.primary}
+      onPress={handleSubmit}
+    />,
   ];
+
   const ListCategories = () => {
     return (
       <View style={style.categoryContainer}>

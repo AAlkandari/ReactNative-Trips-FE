@@ -27,9 +27,9 @@ const Signin = ({ navigation }) => {
     username: "",
     password: "",
   });
-  const handleSubmit = () => {
-    authStore.signIn(user);
-    navigation.navigate("HomeScreen");
+  const handleSubmit = async () => {
+    await authStore.signIn(user);
+    if (authStore.user) navigation.replace("HomeScreen");
   };
   return (
     <Center w="100%">
