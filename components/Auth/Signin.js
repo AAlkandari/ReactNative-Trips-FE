@@ -13,22 +13,27 @@ import {
   Input,
   VStack,
   Text,
+  View,
 } from "native-base";
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
+import COLORS from "../const/color";
 import StackNavigation from "../Navigation/StackNavigation";
-import { StyleSheet } from "react-native";
+import { StyleSheet, SafeAreaView, StatusBar } from "react-native";
+// import authStore from "../../stores/authStore";
+
 const Signin = ({ navigation }) => {
-  const { user, setUser } = useState({
+  const [user, setUser] = useState({
     username: "",
     password: "",
   });
   const handleSubmit = () => {
-    authStore.signin(user);
+    authStore.signIn(user);
     navigation.goBack;
   };
   return (
     <Center w="100%">
-      <Box safeArea p="2" py="8" w="90%" maxW="290">
+      <Box safeArea p="10" py="12" w="90%" maxW="290">
         <Heading
           mt="1"
           _dark={{
@@ -55,7 +60,7 @@ const Signin = ({ navigation }) => {
               onChangeText={(value) => setUser({ ...user, password: value })}
             />
           </FormControl>
-          <Button mt="2" colorScheme="indigo" onPress={handleSubmit}>
+          <Button style={style.btn} mt="2" onPress={handleSubmit}>
             Sign in
           </Button>
           <HStack mt="6" justifyContent="center">
@@ -83,5 +88,29 @@ const Signin = ({ navigation }) => {
     </Center>
   );
 };
+
+const style = StyleSheet.create({
+  header: {
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: COLORS.primary,
+  },
+  headerTitle: {
+    color: COLORS.white,
+    fontWeight: "bold",
+    fontSize: 23,
+  },
+  btn: {
+    height: 50,
+    width: 120,
+    backgroundColor: COLORS.primary,
+    marginTop: 20,
+    borderRadius: 7,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default Signin;

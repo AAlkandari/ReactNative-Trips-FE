@@ -11,17 +11,20 @@ import {
   VStack,
   Text,
 } from "native-base";
+import { StyleSheet } from "react-native";
+import COLORS from "../const/color";
+// import authStore from "../../stores/authStore";
 
 const Signup = ({ navigation }) => {
   const toast = useToast();
-  const { user, setUser } = useState({
+  const [user, setUser] = useState({
     username: "",
     password: "",
     email: "",
   });
 
   const handleSubmit = () => {
-    authStore.Signup(user);
+    authStore.signUp(user);
     navigation.goBack;
   };
   return (
@@ -60,20 +63,10 @@ const Signup = ({ navigation }) => {
               onChangeText={(value) => setUser({ ...user, email: value })}
             />
           </FormControl>
-          <Button mt="2" colorScheme="indigo" onPress={handleSubmit}>
+          <Button style={style.btn} onPress={handleSubmit}>
             Sign up
           </Button>
           <HStack mt="6" justifyContent="center">
-            <Button
-              fontSize="sm"
-              color="coolGray.600"
-              _dark={{
-                color: "warmGray.200",
-              }}
-              onPress={() => navigation.navigate("Signin")}
-            >
-              I'm Already sign in.
-            </Button>
             {/* <Link
               _text={{
                 color: "indigo.500",
@@ -90,5 +83,27 @@ const Signup = ({ navigation }) => {
     </Center>
   );
 };
-
+const style = StyleSheet.create({
+  header: {
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: COLORS.primary,
+  },
+  headerTitle: {
+    color: COLORS.white,
+    fontWeight: "bold",
+    fontSize: 23,
+  },
+  btn: {
+    height: 50,
+    width: 120,
+    backgroundColor: COLORS.primary,
+    marginTop: 20,
+    borderRadius: 7,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 export default Signup;
