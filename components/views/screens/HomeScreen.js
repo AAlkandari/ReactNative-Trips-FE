@@ -21,17 +21,18 @@ import COLORS from "../../const/color";
 import places from "../../const/places";
 import authStore from "../../../stores/authStore";
 const { width } = Dimensions.get("screen");
+
 const HomeScreen = ({ navigation }) => {
   const handleSubmit = async () => {
     await authStore.signout();
     console.log("signedOut");
   };
   const categoryIcons = [
-    <Icon1 name="create" size={25} color={COLORS.primary} />,
-    <Icon2 name="place" size={25} color={COLORS.primary} />,
-    <Icon3 name="user" size={25} color={COLORS.primary} />,
+    <Icon1 ios="create" size={25} color={COLORS.primary} />,
+    <Icon2 ios="place" size={25} color={COLORS.primary} />,
+    <Icon3 ios="user" size={25} color={COLORS.primary} />,
     <Icon4
-      name="logout"
+      ios="logout"
       size={25}
       color={COLORS.primary}
       onPress={handleSubmit}
@@ -158,7 +159,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
         <ListCategories />
-        <Text style={style.sectionTitle}>Places</Text>
+        <Text style={style.sectionTitle}>Trips</Text>
         <View>
           <FlatList
             contentContainerStyle={{ paddingLeft: 20 }}
