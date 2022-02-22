@@ -1,9 +1,4 @@
 import {
-  Link,
-  NavigationContainer,
-  useLinkProps,
-} from "@react-navigation/native";
-import {
   Box,
   Button,
   Center,
@@ -13,14 +8,13 @@ import {
   Input,
   VStack,
   Text,
-  View,
 } from "native-base";
 import React from "react";
 import { useState } from "react";
 import COLORS from "../const/color";
-import StackNavigation from "../Navigation/StackNavigation";
-import { StyleSheet, SafeAreaView, StatusBar } from "react-native";
+import { StyleSheet } from "react-native";
 import authStore from "../../stores/authStore";
+import { observer } from "mobx-react";
 
 const Signin = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -28,9 +22,11 @@ const Signin = ({ navigation }) => {
     password: "",
   });
   const handleSubmit = async () => {
+    console.log("🚀 ~ file: Signin.js ~ line 21 ~ Signin ~ user", user);
     await authStore.signIn(user);
     if (authStore.user) navigation.replace("HomeScreen");
   };
+
   return (
     <Center w="100%">
       <Box safeArea p="10" py="12" w="90%" maxW="290">
@@ -113,4 +109,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default Signin;
+export default observer(Signin);
