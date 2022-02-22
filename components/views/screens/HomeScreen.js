@@ -25,8 +25,10 @@ const { width } = Dimensions.get("screen");
 const HomeScreen = ({ navigation }) => {
   const handleSubmit = async () => {
     await authStore.signout();
+    navigation.replace("OnBoardScreen");
     console.log("signedOut");
   };
+
   const categoryIcons = [
     <Icon1 ios="create" size={25} color={COLORS.primary} />,
     <Icon2 ios="place" size={25} color={COLORS.primary} />,

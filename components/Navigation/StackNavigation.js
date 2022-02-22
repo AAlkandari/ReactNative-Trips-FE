@@ -12,9 +12,9 @@ const StackNavigation = () => {
   return (
     <Navigator screenOptions={{ headerShown: false }}>
       <Screen name="OnBoardScreen" component={OnBoardScreen} />
+      <Screen name="HomeScreen" component={HomeScreen} />
       <Screen name="Signin" component={Signin} />
       <Screen name="Signup" component={Signup} />
-      <Screen name="HomeScreen" component={HomeScreen} />
       <Screen name="DetailsScreen" component={DetailsScreen} />
     </Navigator>
   );

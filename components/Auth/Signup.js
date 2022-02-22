@@ -13,7 +13,7 @@ import {
 } from "native-base";
 import { StyleSheet } from "react-native";
 import COLORS from "../const/color";
-// import authStore from "../../stores/authStore";
+import authStore from "../../stores/authStore";
 
 const Signup = ({ navigation }) => {
   const toast = useToast();
