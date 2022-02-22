@@ -13,7 +13,7 @@ import {
 } from "native-base";
 import { StyleSheet } from "react-native";
 import COLORS from "../const/color";
-// import authStore from "../../stores/authStore";
+import authStore from "../../stores/authStore";
 
 const Signup = ({ navigation }) => {
   const toast = useToast();
@@ -56,13 +56,13 @@ const Signup = ({ navigation }) => {
               onChangeText={(value) => setUser({ ...user, password: value })}
             />
           </FormControl>
-          <FormControl>
+          {/* <FormControl>
             <FormControl.Label>Email</FormControl.Label>
             <Input
               type="email"
               onChangeText={(value) => setUser({ ...user, email: value })}
             />
-          </FormControl>
+          </FormControl> */}
           <Button style={style.btn} onPress={handleSubmit}>
             Sign up
           </Button>

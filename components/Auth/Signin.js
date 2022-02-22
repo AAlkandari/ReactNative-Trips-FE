@@ -1,9 +1,4 @@
 import {
-  Link,
-  NavigationContainer,
-  useLinkProps,
-} from "@react-navigation/native";
-import {
   Box,
   Button,
   Center,
@@ -13,12 +8,10 @@ import {
   Input,
   VStack,
   Text,
-  View,
 } from "native-base";
 import React from "react";
 import { useState } from "react";
 import COLORS from "../const/color";
-import StackNavigation from "../Navigation/StackNavigation";
 import { StyleSheet, SafeAreaView, StatusBar } from "react-native";
 import authStore from "../../stores/authStore";
 

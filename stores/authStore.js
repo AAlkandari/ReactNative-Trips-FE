@@ -33,7 +33,6 @@ class AuthStore {
     delete api.defaults.headers.common.Authorization;
     this.user = null;
     await AsyncStorage.removeItem("myToken");
-    navigation.Replace("OnBoardScreen");
   };
 
   checkForToken = async () => {

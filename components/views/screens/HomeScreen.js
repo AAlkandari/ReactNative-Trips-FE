@@ -115,9 +115,7 @@ const HomeScreen = ({ navigation }) => {
           }}
         >
           <View style={{ flex: 1 }}>
-            <Text style={style.headerTitle}>
-              Welcome Back `{authStore.user}`
-            </Text>
+            <Text style={style.headerTitle}>Welcome Back</Text>
             <Text style={style.headerTitle}></Text>
             <View style={style.inputContainer}>
               <Icon name="search" size={28} />
