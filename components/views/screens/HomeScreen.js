@@ -20,9 +20,15 @@ import Icon4 from "react-native-vector-icons/MaterialCommunityIcons";
 import COLORS from "../../const/color";
 import places from "../../const/places";
 import authStore from "../../../stores/authStore";
+import tripStore from "../../../stores/tripStore";
+import { Spinner } from "native-base";
+import DetailsScreen from "./DetailScreen";
+import { observer } from "mobx-react";
+
 const { width } = Dimensions.get("screen");
 
 const HomeScreen = ({ navigation }) => {
+  if (tripStore.isLoading) return <Spinner />;
   const handleSubmit = async () => {
     await authStore.signout();
     navigation.replace("OnBoardScreen");
@@ -30,11 +36,11 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const categoryIcons = [
-    <Icon1 ios="create" size={25} color={COLORS.primary} />,
-    <Icon2 ios="place" size={25} color={COLORS.primary} />,
-    <Icon3 ios="user" size={25} color={COLORS.primary} />,
+    <Icon1 name="create" size={25} color={COLORS.primary} />,
+    <Icon2 name="place" size={25} color={COLORS.primary} />,
+    <Icon3 name="user" size={25} color={COLORS.primary} />,
     <Icon4
-      ios="logout"
+      name="logout"
       size={25}
       color={COLORS.primary}
       onPress={handleSubmit}
@@ -57,9 +63,9 @@ const HomeScreen = ({ navigation }) => {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={() => navigation.navigate("DetailsScreen", place)}
+        onPress={() => navigation.navigate("DetailsScreen", { place })}
       >
-        <ImageBackground style={style.cardImage} source={place.image}>
+        <ImageBackground style={style.cardImage} source={{ uri: place.image }}>
           <Text
             style={{
               color: COLORS.white,
@@ -68,7 +74,7 @@ const HomeScreen = ({ navigation }) => {
               marginTop: 10,
             }}
           >
-            {place.name}
+            {place.title}
           </Text>
           <View
             style={{
@@ -84,55 +90,16 @@ const HomeScreen = ({ navigation }) => {
                 {place.location}
               </Text>
             </View>
-            <View style={{ flexDirection: "row" }}>
+            {/* <View style={{ flexDirection: "row" }}>
               <Icon name="star" size={20} color={COLORS.white} />
               <Text style={{ marginLeft: 5, color: COLORS.white }}>5.0</Text>
-            </View>
+            </View> */}
           </View>
         </ImageBackground>
       </TouchableOpacity>
     );
   };
 
-  // const RecommendedCard = ({ place }) => {
-  //   return (
-  //     <ImageBackground style={style.rmCardImage} source={place.image}>
-  //       <Text
-  //         style={{
-  //           color: COLORS.white,
-  //           fontSize: 22,
-  //           fontWeight: "bold",
-  //           marginTop: 10,
-  //         }}
-  //       >
-  //         {place.name}
-  //       </Text>
-  //       <View
-  //         style={{
-  //           flex: 1,
-  //           justifyContent: "space-between",
-  //           alignItems: "flex-end",
-  //         }}
-  //       >
-  //         <View style={{ width: "100%", flexDirection: "row", marginTop: 10 }}>
-  //           <View style={{ flexDirection: "row" }}>
-  //             <Icon name="place" size={22} color={COLORS.white} />
-  //             <Text style={{ color: COLORS.white, marginLeft: 5 }}>
-  //               {place.location}
-  //             </Text>
-  //           </View>
-  //           <View style={{ flexDirection: "row" }}>
-  //             <Icon name="star" size={22} color={COLORS.white} />
-  //             <Text style={{ color: COLORS.white, marginLeft: 5 }}>5.0</Text>
-  //           </View>
-  //         </View>
-  //         <Text style={{ color: COLORS.white, fontSize: 13 }}>
-  //           {place.details}
-  //         </Text>
-  //       </View>
-  //     </ImageBackground>
-  //   );
-  // };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <StatusBar translucent={false} backgroundColor={COLORS.primary} />
@@ -149,8 +116,10 @@ const HomeScreen = ({ navigation }) => {
           }}
         >
           <View style={{ flex: 1 }}>
-            <Text style={style.headerTitle}>Hello</Text>
-            <Text style={style.headerTitle}>m7md</Text>
+            <Text style={style.headerTitle}>
+              Welcome Back `{authStore.user}`
+            </Text>
+            <Text style={style.headerTitle}></Text>
             <View style={style.inputContainer}>
               <Icon name="search" size={28} />
               <TextInput
@@ -160,6 +129,7 @@ const HomeScreen = ({ navigation }) => {
             </View>
           </View>
         </View>
+
         <ListCategories />
         <Text style={style.sectionTitle}>Trips</Text>
         <View>
@@ -167,7 +137,7 @@ const HomeScreen = ({ navigation }) => {
             contentContainerStyle={{ paddingLeft: 20 }}
             horizontal
             showsHorizontalScrollIndicator={false}
-            data={places}
+            data={tripStore.trips}
             renderItem={({ item }) => <Card place={item} />}
           />
           {/* <Text style={style.sectionTitle}>Recommended</Text>
@@ -184,6 +154,7 @@ const HomeScreen = ({ navigation }) => {
     </SafeAreaView>
   );
 };
+export default observer(HomeScreen);
 
 const style = StyleSheet.create({
   header: {
@@ -219,7 +190,7 @@ const style = StyleSheet.create({
   iconContainer: {
     height: 60,
     width: 60,
-    backgroundColor: COLORS.secondary,
+    // backgroundColor: COLORS.secondary,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
@@ -247,4 +218,3 @@ const style = StyleSheet.create({
     padding: 10,
   },
 });
-export default HomeScreen;

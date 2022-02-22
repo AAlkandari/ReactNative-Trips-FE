@@ -3,12 +3,11 @@ import api from "./api";
 
 class TripStore {
   trips = [];
+  isLoading = true;
 
   constructor() {
     makeAutoObservable(this);
   }
-
-  isLoading = true;
 
   fetchTrips = async () => {
     try {

@@ -9,18 +9,19 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import COLORS from "../../const/color";
+
 const DetailsScreen = ({ navigation, route }) => {
-  const place = route.params;
+  const { place } = route.params;
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <StatusBar translucent backgroundColor="rgba(0,0,0,0)" />
-      <ImageBackground style={{ flex: 0.7 }} source={place.image}>
+      <ImageBackground style={{ flex: 0.7 }} source={{ uri: place.image }}>
         <View style={style.header}>
           <Icon
             name="arrow-back-ios"
             size={28}
             color={COLORS.white}
-            onPress={navigation.goBack}
+            onPress={() => navigation.goBack()}
           />
           <Icon name="more-vert" size={28} color={COLORS.white} />
         </View>
@@ -66,7 +67,9 @@ const DetailsScreen = ({ navigation, route }) => {
         <Text style={{ marginTop: 20, fontWeight: "bold", fontSize: 20 }}>
           About the trip
         </Text>
-        <Text style={{ marginTop: 20, lineHeight: 22 }}>{place.details}</Text>
+        <Text style={{ marginTop: 20, lineHeight: 22 }}>
+          {place.description}
+        </Text>
       </View>
       <View style={style.footer}>
         <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>

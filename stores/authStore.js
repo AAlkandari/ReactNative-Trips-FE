@@ -55,12 +55,14 @@ class AuthStore {
     const token = await AsyncStorage.getItem("myToken");
     if (token) {
       const currentTime = Date.now();
-      const user = decode(token);
-      if (user.exp >= currentTime) {
+      const exp = decode(token).exp;
+      if (exp > currentTime) {
         this.setUser(token);
       } else {
-        this.signOut();
+        this.signout();
       }
+    } else {
+      this.signout();
     }
   };
 }
