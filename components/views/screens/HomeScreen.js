@@ -34,6 +34,7 @@ const HomeScreen = ({ navigation }) => {
     navigation.replace("OnBoardScreen");
     console.log("signedOut");
   };
+
   const categoryIcons = [
     <Icon1 name="create" size={25} color={COLORS.primary} />,
     <Icon2 name="place" size={25} color={COLORS.primary} />,
