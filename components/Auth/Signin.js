@@ -22,7 +22,6 @@ const Signin = ({ navigation }) => {
     password: "",
   });
   const handleSubmit = async () => {
-    console.log("🚀 ~ file: Signin.js ~ line 21 ~ Signin ~ user", user);
     await authStore.signIn(user);
     if (authStore.user) navigation.replace("HomeScreen");
   };
