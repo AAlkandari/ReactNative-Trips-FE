@@ -21,12 +21,13 @@ const DetailsScreen = ({ navigation, route }) => {
   const userProfile = profileStore.profiles.find(
     (profile) => profile._id === place.owner.profile
   );
+  console.log(
+    "🚀 ~ file: DetailScreen.js ~ line 19 ~ DetailsScreen ~ place",
+    place.owner._id
+  );
+
   const handleRemove = () => {
     tripStore.removeTrips(place._id);
-    navigation.navigate("HomeScreen");
-  };
-  const handleUpdate = () => {
-    tripStore.updateTrips(trip._id);
     navigation.navigate("HomeScreen");
   };
 
@@ -66,22 +67,24 @@ const DetailsScreen = ({ navigation, route }) => {
         </View>
       </ImageBackground>
       <View style={style.detailsContainer}>
-        <View style={style.iconContainer}>
-          <Icon2
-            name="trash-o"
-            color={COLORS.primary}
-            size={30}
-            onPress={handleRemove}
-          />
-        </View>
         <View style={style.iconContainer2}>
           <Icon2
             name="edit"
             color={COLORS.primary}
             size={30}
-            onPress={handleUpdate}
+            onPress={() => navigation.navigate("UpdateTrip")}
           />
         </View>
+        {authstore.user?._id === place.owner._id && (
+          <View style={style.iconContainer}>
+            <Icon2
+              name="trash"
+              color={COLORS.primary}
+              size={30}
+              onPress={handleRemove}
+            />
+          </View>
+        )}
         <View style={{ flexDirection: "row", marginTop: 10 }}>
           <Icon name="place" size={28} color={COLORS.primary} />
           <Text
@@ -112,7 +115,7 @@ const DetailsScreen = ({ navigation, route }) => {
               color: COLORS.white,
             }}
           >
-            By: "{place.owner?.profile}"
+            By: {place.owner.username}
           </Text>
           <Text
             style={{
@@ -139,12 +142,24 @@ const DetailsScreen = ({ navigation, route }) => {
             View Profile
           </Text>
         </View>
+        {authstore.user?._id === place.owner._id && (
+          <View style={style.bookNowBtn}>
+            <Text
+              style={{
+                color: COLORS.primary,
+                fontSize: 12,
+                fontWeight: "bold",
+              }}
+            >
+              View Profile
+            </Text>
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );
 };
 
-export default observer(DetailsScreen);
 const style = StyleSheet.create({
   bookNowBtn: {
     height: 50,
@@ -159,10 +174,10 @@ const style = StyleSheet.create({
   iconContainer: {
     height: 60,
     width: 60,
-    top: 40,
+    top: -20,
     backgroundColor: COLORS.white,
     borderRadius: 30,
-    left: 510,
+    left: 500,
     elevation: 10,
     justifyContent: "center",
     alignItems: "center",
@@ -170,10 +185,10 @@ const style = StyleSheet.create({
   iconContainer2: {
     height: 60,
     width: 60,
-    top: -95,
+    top: -30,
     backgroundColor: COLORS.white,
     borderRadius: 30,
-    right: -510,
+    right: -500,
     elevation: 10,
     justifyContent: "center",
     alignItems: "center",
