@@ -112,7 +112,7 @@ const DetailsScreen = ({ navigation, route }) => {
               color: COLORS.white,
             }}
           >
-            By: "{place.owner?.profile}"
+            By: "{place.owner.username}"
           </Text>
           <Text
             style={{
