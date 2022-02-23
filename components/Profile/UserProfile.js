@@ -8,32 +8,29 @@ import {
   View,
   Text,
 } from "react-native";
+import COLORS from "../const/color";
+import profileStore from "../../stores/profileStore";
+import { Spinner } from "native-base";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Icon2 from "react-native-vector-icons/FontAwesome";
-import tripStore from "../../../stores/tripStore";
-import COLORS from "../../const/color";
-import authstore from "../../../stores/authStore";
-import profileStore from "../../../stores/profileStore";
+import authstore from "../../stores/authStore";
 
-const DetailsScreen = ({ navigation, route }) => {
-  const { place } = route.params;
+const UserProfile = ({ navigation, route }) => {
+  if (!profileStore.isloading) return <Spinner />;
+  const currentProfile = route.params.profile;
 
-  const userProfile = profileStore.profiles.find(
-    (profile) => profile._id === place.owner.profile
-  );
-  const handleRemove = () => {
-    tripStore.removeTrips(place._id);
-    navigation.navigate("HomeScreen");
-  };
-  const handleUpdate = () => {
-    tripStore.updateTrips(trip._id);
-    navigation.navigate("HomeScreen");
-  };
+  //   const handleUpdate = () => {
+  //     tripStore.updateTrips(trip._id);
+  //     navigation.navigate("HomeScreen");
+  //   };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <StatusBar translucent backgroundColor="rgba(0,0,0,0)" />
-      <ImageBackground style={{ flex: 0.7 }} source={{ uri: place.image }}>
+      <ImageBackground
+        style={{ flex: 0.7 }}
+        source={{ uri: currentProfile.image }}
+      >
         <View style={style.header}>
           <Icon
             name="arrow-back-ios"
@@ -53,37 +50,51 @@ const DetailsScreen = ({ navigation, route }) => {
               marginBottom: 20,
             }}
           >
-            {place.title}
+            {currentProfile.user.username}
           </Text>
-          <View style={{ flexDirection: "row" }}>
+          {authstore.user?._id === currentProfile.user._id && (
+            <View style={style.iconContainer2}>
+              <Icon2
+                name="edit"
+                color={COLORS.primary}
+                size={30}
+                onPress={() =>
+                  navigation.navigate("EditProfile", {
+                    userProfile: currentProfile,
+                  })
+                }
+              />
+            </View>
+          )}
+          {/* <View style={{ flexDirection: "row" }}>
             <Icon name="star" size={30} color={COLORS.orange} />
             <Text
               style={{ color: COLORS.white, fontWeight: "bold", fontSize: 20 }}
             >
               5.0
             </Text>
-          </View>
+          </View> */}
         </View>
       </ImageBackground>
       <View style={style.detailsContainer}>
-        <View style={style.iconContainer}>
+        {/* <View style={style.iconContainer}>
           <Icon2
             name="trash-o"
             color={COLORS.primary}
             size={30}
             onPress={handleRemove}
           />
-        </View>
-        <View style={style.iconContainer2}>
+        </View> */}
+        {/* <View style={style.iconContainer2}>
           <Icon2
             name="edit"
             color={COLORS.primary}
             size={30}
             onPress={handleUpdate}
           />
-        </View>
+        </View> */}
         <View style={{ flexDirection: "row", marginTop: 10 }}>
-          <Icon name="place" size={28} color={COLORS.primary} />
+          {/* <Icon name="place" size={28} color={COLORS.primary} />
           <Text
             style={{
               marginLeft: 5,
@@ -93,19 +104,19 @@ const DetailsScreen = ({ navigation, route }) => {
             }}
           >
             {place.location}
-          </Text>
+          </Text> */}
         </View>
 
         <Text style={{ marginTop: 20, fontWeight: "bold", fontSize: 20 }}>
-          About the trip
+          About Me
         </Text>
         <Text style={{ marginTop: 20, lineHeight: 22 }}>
-          {place.description}
+          {currentProfile.bio}
         </Text>
       </View>
       <View style={style.footer}>
         <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-          <Text
+          {/* <Text
             style={{
               fontSize: 18,
               fontWeight: "bold",
@@ -113,7 +124,7 @@ const DetailsScreen = ({ navigation, route }) => {
             }}
           >
             By: "{place.owner?.profile}"
-          </Text>
+          </Text> */}
           <Text
             style={{
               fontSize: 12,
@@ -124,27 +135,25 @@ const DetailsScreen = ({ navigation, route }) => {
           ></Text>
         </View>
 
-        {/* {authstore.user && authstore.user._id == place.owner && ( */}
-        <View style={style.bookNowBtn}>
-          <Text
-            style={{
-              color: COLORS.primary,
-              fontSize: 12,
-              fontWeight: "bold",
-            }}
-            onPress={() =>
-              navigation.navigate("UserProfile", { profile: userProfile })
-            }
-          >
-            View Profile
-          </Text>
-        </View>
+        {/* {authstore.user && authstore.user._id == place.owner && (
+          <View style={style.bookNowBtn}>
+            <Text
+              style={{
+                color: COLORS.primary,
+                fontSize: 12,
+                fontWeight: "bold",
+              }}
+            >
+              View Profile
+            </Text>
+          </View>
+        )} */}
       </View>
     </SafeAreaView>
   );
 };
 
-export default observer(DetailsScreen);
+export default observer(UserProfile);
 const style = StyleSheet.create({
   bookNowBtn: {
     height: 50,

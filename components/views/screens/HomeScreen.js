@@ -23,6 +23,7 @@ import tripStore from "../../../stores/tripStore";
 import { Spinner } from "native-base";
 import { observer } from "mobx-react";
 import authstore from "../../../stores/authStore";
+import profileStore from "../../../stores/profileStore";
 
 const { width } = Dimensions.get("screen");
 
@@ -34,6 +35,12 @@ const HomeScreen = ({ navigation }) => {
     console.log("signedOut");
   };
 
+  const myOwnProfile = () => {
+    if (!profileStore.userProfile)
+      profileStore.setUserProfile(authstore.user._id);
+    navigation.navigate("UserProfile", { profile: profileStore.userProfile });
+  };
+
   const categoryIcons = [
     <Icon1
       name="create"
@@ -42,7 +49,12 @@ const HomeScreen = ({ navigation }) => {
       onPress={() => navigation.navigate("CreateTrip")}
     />,
     <Icon2 name="place" size={25} color={COLORS.primary} />,
-    <Icon3 name="user" size={25} color={COLORS.primary} />,
+    <Icon3
+      name="user"
+      size={25}
+      color={COLORS.primary}
+      onPress={myOwnProfile}
+    />,
     <Icon4
       name="logout"
       size={25}

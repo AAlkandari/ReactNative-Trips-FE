@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 import decode from "jwt-decode";
 import api from "./api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import profileStore from "./profileStore";
 
 class AuthStore {
   user = null;
@@ -32,6 +33,7 @@ class AuthStore {
     try {
       const resp = await api.post("/signup", user);
       this.setUser(resp.data.token);
+      await profileStore.assignProfileToUser();
     } catch (error) {
       console.log(
         "🚀 ~ file: authStore.js ~ line 37 ~ AuthStore ~ signUp= ~ error",
