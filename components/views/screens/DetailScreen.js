@@ -205,5 +205,3 @@ const style = StyleSheet.create({
     borderTopRightRadius: 15,
   },
 });
-
-export default observer(DetailsScreen);
