@@ -13,11 +13,11 @@ import {
 import COLORS from "../const/color";
 import profileStore from "../../stores/profileStore";
 
-const EditProfile = ({ navigation, route }) => {
-  const { userProfile } = route.params;
+const EditProfile = ({ route, navigation }) => {
+  const userProfile = route.params.userProfile;
   const [editProfile, setEditProfile] = useState({
-    image: userProfile.image,
-    bio: userProfile.bio,
+    image: profileStore.userProfile.image,
+    bio: profileStore.userProfile.bio,
   });
   const handleUpdate = () => {
     profileStore.editProfile(editProfile, userProfile._id, navigation);

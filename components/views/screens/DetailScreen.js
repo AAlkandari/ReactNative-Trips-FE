@@ -17,6 +17,7 @@ import profileStore from "../../../stores/profileStore";
 
 const DetailsScreen = ({ navigation, route }) => {
   const { place } = route.params;
+  const currentProfile = route.params.profile;
 
   const userProfile = profileStore.profiles.find(
     (profile) => profile._id === place.owner.profile
@@ -136,7 +137,9 @@ const DetailsScreen = ({ navigation, route }) => {
               fontWeight: "bold",
             }}
             onPress={() =>
-              navigation.navigate("UserProfile", { profile: userProfile })
+              navigation.navigate("UserProfile", {
+                userProfile: userProfile,
+              })
             }
           >
             View Profile

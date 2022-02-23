@@ -7,6 +7,7 @@ import {
   StyleSheet,
   View,
   Text,
+  Pressable,
 } from "react-native";
 import COLORS from "../const/color";
 import profileStore from "../../stores/profileStore";
@@ -14,6 +15,7 @@ import { Spinner } from "native-base";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Icon2 from "react-native-vector-icons/FontAwesome";
 import authstore from "../../stores/authStore";
+import EditProfile from "./EditProfile";
 
 const UserProfile = ({ navigation, route }) => {
   if (!profileStore.isloading) return <Spinner />;
@@ -54,7 +56,7 @@ const UserProfile = ({ navigation, route }) => {
           </Text>
           <View style={style.detailsContainer}>
             <View style={style.iconContainer2}>
-              {authstore.user?._id === currentProfile.user._id && (
+              {/* {authstore.user?._id === currentProfile.user._id && (
                 <View style={style.iconContainer2}>
                   <Icon2
                     name="edit"
@@ -67,17 +69,17 @@ const UserProfile = ({ navigation, route }) => {
                     }
                   />
                 </View>
-              )}
+              )} */}
             </View>
           </View>
-          {/* <View style={{ flexDirection: "row" }}>
+          <View style={{ flexDirection: "row" }}>
             <Icon name="star" size={30} color={COLORS.orange} />
             <Text
               style={{ color: COLORS.white, fontWeight: "bold", fontSize: 20 }}
             >
               5.0
             </Text>
-          </View> */}
+          </View>
         </View>
       </ImageBackground>
       <View style={style.detailsContainer}>
@@ -89,14 +91,19 @@ const UserProfile = ({ navigation, route }) => {
             onPress={handleRemove}
           />
         </View> */}
-        {/* <View style={style.iconContainer2}>
-          <Icon2
-            name="edit"
-            color={COLORS.primary}
-            size={30}
-            onPress={handleUpdate}
-          />
-        </View> */}
+        {authstore.user?._id === currentProfile.user._id && (
+          <View style={style.iconContainer2}>
+            <Pressable
+              onPress={() =>
+                navigation.navigate("EditProfile", {
+                  userProfile: currentProfile,
+                })
+              }
+            >
+              <Icon2 name="edit" color={COLORS.primary} size={30} />
+            </Pressable>
+          </View>
+        )}
         <View style={{ flexDirection: "row", marginTop: 10 }}>
           {/* <Icon name="place" size={28} color={COLORS.primary} />
           <Text
@@ -111,7 +118,7 @@ const UserProfile = ({ navigation, route }) => {
           </Text> */}
         </View>
 
-        <Text style={{ marginTop: 20, fontWeight: "bold", fontSize: 20 }}>
+        <Text style={{ marginTop: 0, fontWeight: "bold", fontSize: 20 }}>
           About Me
         </Text>
         <Text style={{ marginTop: 20, lineHeight: 22 }}>
@@ -183,7 +190,7 @@ const style = StyleSheet.create({
   iconContainer2: {
     height: 60,
     width: 60,
-    top: -95,
+    top: -20,
     backgroundColor: COLORS.white,
     borderRadius: 30,
     right: -510,
