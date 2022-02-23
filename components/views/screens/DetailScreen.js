@@ -1,3 +1,4 @@
+import { observer } from "mobx-react";
 import React from "react";
 import {
   ImageBackground,
@@ -8,11 +9,22 @@ import {
   Text,
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import Icon2 from "react-native-vector-icons/FontAwesome";
+import tripStore from "../../../stores/tripStore";
 import COLORS from "../../const/color";
-import { observer } from "mobx-react";
+import authstore from "../../../stores/authStore";
 
 const DetailsScreen = ({ navigation, route }) => {
   const { place } = route.params;
+  const handleRemove = () => {
+    tripStore.removeTrips(place._id);
+    navigation.navigate("HomeScreen");
+  };
+  const handleUpdate = () => {
+    tripStore.updateTrips(trip._id);
+    navigation.navigate("HomeScreen");
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <StatusBar translucent backgroundColor="rgba(0,0,0,0)" />
@@ -36,7 +48,7 @@ const DetailsScreen = ({ navigation, route }) => {
               marginBottom: 20,
             }}
           >
-            {place.name}
+            {place.title}
           </Text>
           <View style={{ flexDirection: "row" }}>
             <Icon name="star" size={30} color={COLORS.orange} />
@@ -50,7 +62,20 @@ const DetailsScreen = ({ navigation, route }) => {
       </ImageBackground>
       <View style={style.detailsContainer}>
         <View style={style.iconContainer}>
-          <Icon name="favorite" color={COLORS.red} size={30} />
+          <Icon2
+            name="trash-o"
+            color={COLORS.primary}
+            size={30}
+            onPress={handleRemove}
+          />
+        </View>
+        <View style={style.iconContainer2}>
+          <Icon2
+            name="edit"
+            color={COLORS.primary}
+            size={30}
+            onPress={handleUpdate}
+          />
         </View>
         <View style={{ flexDirection: "row", marginTop: 10 }}>
           <Icon name="place" size={28} color={COLORS.primary} />
@@ -65,6 +90,7 @@ const DetailsScreen = ({ navigation, route }) => {
             {place.location}
           </Text>
         </View>
+
         <Text style={{ marginTop: 20, fontWeight: "bold", fontSize: 20 }}>
           About the trip
         </Text>
@@ -92,13 +118,20 @@ const DetailsScreen = ({ navigation, route }) => {
             }}
           ></Text>
         </View>
-        <View style={style.bookNowBtn}>
-          <Text
-            style={{ color: COLORS.primary, fontSize: 16, fontWeight: "bold" }}
-          >
-            View Profile
-          </Text>
-        </View>
+
+        {authstore.user && authstore.user._id == place.owner && (
+          <View style={style.bookNowBtn}>
+            <Text
+              style={{
+                color: COLORS.primary,
+                fontSize: 12,
+                fontWeight: "bold",
+              }}
+            >
+              View Profile
+            </Text>
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );
@@ -108,27 +141,38 @@ export default observer(DetailsScreen);
 const style = StyleSheet.create({
   bookNowBtn: {
     height: 50,
-    width: 150,
+    width: 100,
     backgroundColor: COLORS.white,
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
+    margin: 2,
   },
 
   iconContainer: {
     height: 60,
     width: 60,
-    position: "absolute",
-    top: -30,
+    top: 40,
     backgroundColor: COLORS.white,
     borderRadius: 30,
-    right: 20,
+    left: 510,
+    elevation: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  iconContainer2: {
+    height: 60,
+    width: 60,
+    top: -95,
+    backgroundColor: COLORS.white,
+    borderRadius: 30,
+    right: -510,
     elevation: 10,
     justifyContent: "center",
     alignItems: "center",
   },
   detailsContainer: {
-    top: -30,
+    top: -50,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingVertical: 40,
@@ -161,3 +205,5 @@ const style = StyleSheet.create({
     borderTopRightRadius: 15,
   },
 });
+
+export default observer(DetailsScreen);
