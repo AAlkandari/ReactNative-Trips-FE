@@ -52,20 +52,24 @@ const UserProfile = ({ navigation, route }) => {
           >
             {currentProfile.user.username}
           </Text>
-          {authstore.user?._id === currentProfile.user._id && (
+          <View style={style.detailsContainer}>
             <View style={style.iconContainer2}>
-              <Icon2
-                name="edit"
-                color={COLORS.primary}
-                size={30}
-                onPress={() =>
-                  navigation.navigate("EditProfile", {
-                    userProfile: currentProfile,
-                  })
-                }
-              />
+              {authstore.user?._id === currentProfile.user._id && (
+                <View style={style.iconContainer2}>
+                  <Icon2
+                    name="edit"
+                    color={COLORS.primary}
+                    size={30}
+                    onPress={() =>
+                      navigation.navigate("EditProfile", {
+                        userProfile: currentProfile,
+                      })
+                    }
+                  />
+                </View>
+              )}
             </View>
-          )}
+          </View>
           {/* <View style={{ flexDirection: "row" }}>
             <Icon name="star" size={30} color={COLORS.orange} />
             <Text

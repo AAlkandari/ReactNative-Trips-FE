@@ -142,23 +142,11 @@ const DetailsScreen = ({ navigation, route }) => {
             View Profile
           </Text>
         </View>
-        {authstore.user?._id === place.owner._id && (
-          <View style={style.bookNowBtn}>
-            <Text
-              style={{
-                color: COLORS.primary,
-                fontSize: 12,
-                fontWeight: "bold",
-              }}
-            >
-              View Profile
-            </Text>
-          </View>
-        )}
       </View>
     </SafeAreaView>
   );
 };
+export default observer(DetailsScreen);
 
 const style = StyleSheet.create({
   bookNowBtn: {
