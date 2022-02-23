@@ -29,8 +29,7 @@ const OnBoardScreen = ({ navigation }) => {
             world with us
           </Text>
           <Text style={{ color: COLORS.white, lineHeight: 25, marginTop: 15 }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut
-            sem non erat vehicula dignissim. Morbi eget congue ante, feugiat.
+            Share your experience with others ,, Let them Enjoy !! :D
           </Text>
           <TouchableOpacity
             activeOpacity={0.8}

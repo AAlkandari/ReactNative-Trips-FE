@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import COLORS from "../../const/color";
+import { observer } from "mobx-react";
 
 const DetailsScreen = ({ navigation, route }) => {
   const { place } = route.params;
@@ -80,7 +81,7 @@ const DetailsScreen = ({ navigation, route }) => {
               color: COLORS.white,
             }}
           >
-            M7mdal7mdan
+            By: "{place.owner?.profile}"
           </Text>
           <Text
             style={{
@@ -102,6 +103,8 @@ const DetailsScreen = ({ navigation, route }) => {
     </SafeAreaView>
   );
 };
+
+export default observer(DetailsScreen);
 const style = StyleSheet.create({
   bookNowBtn: {
     height: 50,
@@ -158,5 +161,3 @@ const style = StyleSheet.create({
     borderTopRightRadius: 15,
   },
 });
-
-export default DetailsScreen;

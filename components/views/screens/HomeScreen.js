@@ -18,12 +18,11 @@ import Icon2 from "react-native-vector-icons/MaterialIcons";
 import Icon3 from "react-native-vector-icons/FontAwesome";
 import Icon4 from "react-native-vector-icons/MaterialCommunityIcons";
 import COLORS from "../../const/color";
-import places from "../../const/places";
 import authStore from "../../../stores/authStore";
 import tripStore from "../../../stores/tripStore";
 import { Spinner } from "native-base";
-import DetailsScreen from "./DetailScreen";
 import { observer } from "mobx-react";
+import authstore from "../../../stores/authStore";
 
 const { width } = Dimensions.get("screen");
 
@@ -36,7 +35,12 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const categoryIcons = [
-    <Icon1 name="create" size={25} color={COLORS.primary} />,
+    <Icon1
+      name="create"
+      size={25}
+      color={COLORS.primary}
+      onPress={() => navigation.navigate("CreateTrip")}
+    />,
     <Icon2 name="place" size={25} color={COLORS.primary} />,
     <Icon3 name="user" size={25} color={COLORS.primary} />,
     <Icon4
@@ -117,7 +121,9 @@ const HomeScreen = ({ navigation }) => {
         >
           <View style={{ flex: 1 }}>
             <Text style={style.headerTitle}>Welcome Back</Text>
-            <Text style={style.headerTitle}></Text>
+            <Text style={style.headerTitle}>
+              {authStore.user && authstore.user.username}
+            </Text>
             <View style={style.inputContainer}>
               <Icon name="search" size={28} />
               <TextInput

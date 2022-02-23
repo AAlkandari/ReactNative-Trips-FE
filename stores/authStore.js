@@ -11,7 +11,6 @@ class AuthStore {
     makeAutoObservable(this, {});
   }
   setUser = (token) => {
-    console.log("🚀 ~ file: authStore.js ~ line 14 ~ AuthStore ~ token", token);
     AsyncStorage.setItem("myToken", token);
     api.defaults.headers.common.Authorization = `Bearer ${token}`;
     this.user = decode(token);
@@ -20,10 +19,6 @@ class AuthStore {
   signIn = async (user) => {
     try {
       const resp = await api.post("/signin", user);
-      console.log(
-        "🚀 ~ file: authStore.js ~ line 24 ~ AuthStore ~ signIn= ~ resp",
-        resp
-      );
       this.setUser(resp.data.token);
     } catch (error) {
       console.log(

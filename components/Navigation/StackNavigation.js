@@ -6,6 +6,7 @@ import Signup from "../Auth/Signup";
 import OnBoardScreen from "../views/screens/OnBoardScreen";
 import DetailsScreen from "../views/screens/DetailScreen";
 import HomeScreen from "../views/screens/HomeScreen";
+import CreateTrip from "../Trip/CreateTrip";
 
 const StackNavigation = () => {
   const { Navigator, Screen } = createStackNavigator();
@@ -16,6 +17,7 @@ const StackNavigation = () => {
       <Screen name="Signin" component={Signin} />
       <Screen name="Signup" component={Signup} />
       <Screen name="DetailsScreen" component={DetailsScreen} />
+      <Screen name="CreateTrip" component={CreateTrip} />
     </Navigator>
   );
 };
