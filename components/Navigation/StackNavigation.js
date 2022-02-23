@@ -9,6 +9,7 @@ import HomeScreen from "../views/screens/HomeScreen";
 import CreateTrip from "../Trip/CreateTrip";
 import UserProfile from "../Profile/UserProfile";
 import EditProfile from "../Profile/EditProfile";
+import UpdateTrip from "../Trip/UpdateTrip";
 
 const StackNavigation = () => {
   const { Navigator, Screen } = createStackNavigator();
@@ -25,6 +26,7 @@ const StackNavigation = () => {
       <Screen name="CreateTrip" component={CreateTrip} />
       <Screen name="UserProfile" component={UserProfile} />
       <Screen name="EditProfile" component={EditProfile} />
+      <Screen name="UpdateTrip" component={UpdateTrip} />
     </Navigator>
   );
 };
