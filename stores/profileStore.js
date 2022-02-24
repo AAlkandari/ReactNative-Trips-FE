@@ -43,6 +43,10 @@ class ProfileStore {
         (profile) => profile._id === profileId
       );
       const res = await api.put(`/profiles/${profileId}`, editedProfile);
+      // const formData = new FormData();
+      // for (const key in editedProfile) {
+      //   formData.append(key, editedProfile[key]);
+
       this.userProfile = res.data;
       navigation.navigate("UserProfile", { profile: this.userProfile });
     } catch (error) {

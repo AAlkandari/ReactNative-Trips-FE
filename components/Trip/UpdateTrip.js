@@ -12,6 +12,7 @@ import {
   Heading,
 } from "native-base";
 import COLORS from "../const/color";
+import { observer } from "mobx-react";
 
 const UpdateTrip = ({ navigation, route }) => {
   const { trip } = route.params;
@@ -55,8 +56,8 @@ const UpdateTrip = ({ navigation, route }) => {
               <FormControl>
                 <FormControl.Label>Trip Name: </FormControl.Label>
                 <Input
-                  onChangeText={(value) =>
-                    setUpdatedTrips({ ...updatedTrips, title: value })
+                  onChangeText={(title) =>
+                    setUpdatedTrips({ ...updatedTrips, title })
                   }
                   placeholder="Please Enter Your Trip Name"
                   value={trip.title}
@@ -101,7 +102,7 @@ const UpdateTrip = ({ navigation, route }) => {
   );
 };
 
-export default UpdateTrip;
+export default observer(UpdateTrip);
 
 const styles = StyleSheet.create({
   btn: {
