@@ -16,7 +16,7 @@ const StackNavigation = () => {
   return (
     <Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName="HomeScreen"
+      initialRouteName="OnBoardScreen"
     >
       <Screen name="OnBoardScreen" component={OnBoardScreen} />
       <Screen name="HomeScreen" component={HomeScreen} />

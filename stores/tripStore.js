@@ -44,7 +44,7 @@ class TripStore {
     try {
       await api.put(`/trips/${tripId}`);
       let tripsUpdate = this.trips.map((trip) =>
-        trip._id === tripsUpdate._id ? response.data : trip
+        trip._id === tripId._id ? response.data : trip
       );
       this.trips = tripsUpdate;
     } catch (error) {

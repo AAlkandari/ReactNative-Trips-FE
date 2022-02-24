@@ -13,16 +13,22 @@ import {
 } from "native-base";
 import COLORS from "../const/color";
 
-const UpdateTrip = ({ navigation }) => {
-  const [trip, setTrip] = useState({
-    title: "",
-    image: "",
-    description: "",
+const UpdateTrip = ({ navigation, route }) => {
+  const { trip } = route.params;
+  const [updatedTrips, setUpdatedTrips] = useState({
+    title: trip.title,
+    image: trip.image,
+    description: trip.description,
   });
 
   const handleUpdate = () => {
-    tripStore.updateTrips(trip, navigation);
-    setTrip({
+    console.log(
+      "🚀 ~ file: UpdateTrip.js ~ line 25 ~ handleUpdate ~ trip",
+      trip
+    );
+    tripStore.updateTrips(trip._id, updatedTrips, navigation);
+
+    setUpdatedTrips({
       title: "",
       image: "",
       description: "",
@@ -49,15 +55,20 @@ const UpdateTrip = ({ navigation }) => {
               <FormControl>
                 <FormControl.Label>Trip Name: </FormControl.Label>
                 <Input
-                  onChangeText={(title) => setTrip({ ...trip, title })}
+                  onChangeText={(value) =>
+                    setUpdatedTrips({ ...updatedTrips, title: value })
+                  }
                   placeholder="Please Enter Your Trip Name"
+                  value={trip.title}
                 ></Input>
               </FormControl>
 
               <FormControl>
                 <FormControl.Label>Image: </FormControl.Label>
                 <Input
-                  onChangeText={(image) => setTrip({ ...trip, image })}
+                  onChangeText={(image) =>
+                    setUpdatedTrips({ ...updatedTrips, image })
+                  }
                   placeholder="Please Put Your Image Link"
                 ></Input>
               </FormControl>
@@ -66,7 +77,7 @@ const UpdateTrip = ({ navigation }) => {
                 <FormControl.Label>Description: </FormControl.Label>
                 <Input
                   onChangeText={(description) =>
-                    setTrip({ ...trip, description })
+                    setUpdatedTrips({ ...updatedTrips, description })
                   }
                   placeholder="Please Enter Your Description"
                 ></Input>

@@ -72,7 +72,7 @@ const DetailsScreen = ({ navigation, route }) => {
             name="edit"
             color={COLORS.primary}
             size={30}
-            onPress={() => navigation.navigate("UpdateTrip")}
+            onPress={() => navigation.navigate("UpdateTrip", { trip: place })}
           />
         </View>
         {authstore.user?._id === place.owner._id && (
