@@ -42,14 +42,13 @@ class ProfileStore {
       const findProfile = this.profiles.find(
         (profile) => profile._id === profileId
       );
-      const formData = new FormData();
-      for (const key in editedProfile) {
-        formData.append(key, editedProfile[key]);
-        const res = await api.put(`/profiles/${profileId}`, formData);
-        for (const key in findProfile) findProfile[key] = res.data[key];
-        this.userProfile = res.data;
-        navigation.navigate("UserProfile", { profile: this.userProfile });
-      }
+      // const formData = new FormData();
+      // for (const key in editedProfile) {
+      //   formData.append(key, editedProfile[key]);
+      const res = await api.put(`/profiles/${profileId}`, editedProfile);
+
+      this.userProfile = res.data;
+      navigation.navigate("UserProfile", { profile: this.userProfile });
     } catch (error) {
       console.log(error);
     }

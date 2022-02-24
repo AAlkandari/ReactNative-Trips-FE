@@ -40,9 +40,13 @@ class TripStore {
       );
     }
   };
-  updateTrips = async (tripId) => {
+  updateTrips = async (tripId, updatedTrips) => {
     try {
-      await api.put(`/trips/${tripId}`);
+      const response = await api.put(`/trips/${tripId}`, updatedTrips);
+      console.log(
+        "🚀 ~ file: tripStore.js ~ line 46 ~ TripStore ~ updateTrips= ~ response",
+        response
+      );
       let tripsUpdate = this.trips.map((trip) =>
         trip._id === tripId._id ? response.data : trip
       );
