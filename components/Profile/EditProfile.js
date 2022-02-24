@@ -12,13 +12,16 @@ import {
 } from "native-base";
 import COLORS from "../const/color";
 import profileStore from "../../stores/profileStore";
+import { observer } from "mobx-react";
 
 const EditProfile = ({ route, navigation }) => {
   const userProfile = route.params.userProfile;
+
   const [editProfile, setEditProfile] = useState({
-    image: profileStore.userProfile.image,
-    bio: profileStore.userProfile.bio,
+    image: userProfile.image,
+    bio: userProfile.bio,
   });
+
   const handleUpdate = () => {
     profileStore.editProfile(editProfile, userProfile._id, navigation);
   };
@@ -54,7 +57,10 @@ const EditProfile = ({ route, navigation }) => {
                 <FormControl.Label>Image: </FormControl.Label>
                 <Input
                   onChangeText={(image) =>
-                    setEditProfile({ ...editProfile, image })
+                    setEditProfile({
+                      ...editProfile,
+                      image,
+                    })
                   }
                   placeholder="Please Put Your Image Link"
                 ></Input>
@@ -66,7 +72,7 @@ const EditProfile = ({ route, navigation }) => {
                 </Button>
                 <Button
                   style={styles.btn}
-                  onPress={() => navigation.replace("UserProfile")}
+                  onPress={() => navigation.replace("HomeScreen")}
                 >
                   Back
                 </Button>
@@ -79,7 +85,7 @@ const EditProfile = ({ route, navigation }) => {
   );
 };
 
-export default EditProfile;
+export default observer(EditProfile);
 
 const styles = StyleSheet.create({
   btn: {

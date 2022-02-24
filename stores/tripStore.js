@@ -42,7 +42,7 @@ class TripStore {
   };
   updateTrips = async (tripId) => {
     try {
-      await api.put(`/trips/${updatedTrips._id}`);
+      await api.put(`/trips/${tripId}`);
       let tripsUpdate = this.trips.map((trip) =>
         trip._id === tripsUpdate._id ? response.data : trip
       );

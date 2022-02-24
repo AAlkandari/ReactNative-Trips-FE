@@ -21,11 +21,6 @@ const UserProfile = ({ navigation, route }) => {
   if (!profileStore.isloading) return <Spinner />;
   const currentProfile = route.params.profile;
 
-  //   const handleUpdate = () => {
-  //     tripStore.updateTrips(trip._id);
-  //     navigation.navigate("HomeScreen");
-  //   };
-
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <StatusBar translucent backgroundColor="rgba(0,0,0,0)" />
@@ -83,14 +78,6 @@ const UserProfile = ({ navigation, route }) => {
         </View>
       </ImageBackground>
       <View style={style.detailsContainer}>
-        {/* <View style={style.iconContainer}>
-          <Icon2
-            name="trash-o"
-            color={COLORS.primary}
-            size={30}
-            onPress={handleRemove}
-          />
-        </View> */}
         {authstore.user?._id === currentProfile.user._id && (
           <View style={style.iconContainer2}>
             <Pressable
@@ -127,15 +114,6 @@ const UserProfile = ({ navigation, route }) => {
       </View>
       <View style={style.footer}>
         <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
-          {/* <Text
-            style={{
-              fontSize: 18,
-              fontWeight: "bold",
-              color: COLORS.white,
-            }}
-          >
-            By: "{place.owner?.profile}"
-          </Text> */}
           <Text
             style={{
               fontSize: 12,
@@ -193,7 +171,7 @@ const style = StyleSheet.create({
     top: -20,
     backgroundColor: COLORS.white,
     borderRadius: 30,
-    right: -510,
+    right: "10%",
     elevation: 10,
     justifyContent: "center",
     alignItems: "center",
